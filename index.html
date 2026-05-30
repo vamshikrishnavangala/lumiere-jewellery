@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LUMIÈRE — Fine Jewellery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- CURSOR -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursor-follower"></div>
+
+  <!-- LOADER -->
+  <div class="loader" id="loader">
+    <div class="loader-diamond">
+      <div class="diamond-3d">
+        <div class="face top"></div>
+        <div class="face left"></div>
+        <div class="face right"></div>
+        <div class="face bottom"></div>
+      </div>
+    </div>
+    <p class="loader-text">LUMIÈRE</p>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-logo">LUMIÈRE</div>
+    <ul class="nav-links">
+      <li><a href="#collections">Collections</a></li>
+      <li><a href="#featured">Featured</a></li>
+      <li><a href="#about">Atelier</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-cart">
+      <span class="cart-icon">◇</span>
+      <span class="cart-count">0</span>
+    </div>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobile-menu">
+    <ul>
+      <li><a href="#collections" onclick="closeMobileMenu()">Collections</a></li>
+      <li><a href="#featured" onclick="closeMobileMenu()">Featured</a></li>
+      <li><a href="#about" onclick="closeMobileMenu()">Atelier</a></li>
+      <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="particle" style="--i:1"></div>
+      <div class="particle" style="--i:2"></div>
+      <div class="particle" style="--i:3"></div>
+      <div class="particle" style="--i:4"></div>
+      <div class="particle" style="--i:5"></div>
+      <div class="particle" style="--i:6"></div>
+      <div class="particle" style="--i:7"></div>
+      <div class="particle" style="--i:8"></div>
+    </div>
+
+    <!-- 3D Rotating Ring -->
+    <div class="hero-3d-container" id="hero3d">
+      <div class="ring-scene">
+        <div class="ring-3d" id="ring">
+          <div class="ring-band"></div>
+          <div class="ring-gem">
+            <div class="gem-face f1"></div>
+            <div class="gem-face f2"></div>
+            <div class="gem-face f3"></div>
+            <div class="gem-face f4"></div>
+            <div class="gem-face f5"></div>
+            <div class="gem-face f6"></div>
+            <div class="gem-sparkle s1"></div>
+            <div class="gem-sparkle s2"></div>
+            <div class="gem-sparkle s3"></div>
+          </div>
+        </div>
+        <div class="ring-shadow"></div>
+      </div>
+    </div>
+
+    <div class="hero-content">
+      <p class="hero-sub reveal">Paris · Mumbai · New York</p>
+      <h1 class="hero-title reveal">
+        <span>Crafted for</span>
+        <em>Eternity</em>
+      </h1>
+      <p class="hero-desc reveal">Each piece tells a story woven in gold, set with gems that capture light the way memory captures a moment.</p>
+      <div class="hero-cta reveal">
+        <a href="#collections" class="btn-primary">Explore Collection</a>
+        <a href="#about" class="btn-ghost">Our Story</a>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+      <span>SCROLL</span>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <span>18K GOLD ◇</span><span>ETHICALLY SOURCED ◇</span><span>HANDCRAFTED ◇</span>
+      <span>CERTIFIED DIAMONDS ◇</span><span>BESPOKE DESIGNS ◇</span><span>SINCE 1998 ◇</span>
+      <span>18K GOLD ◇</span><span>ETHICALLY SOURCED ◇</span><span>HANDCRAFTED ◇</span>
+      <span>CERTIFIED DIAMONDS ◇</span><span>BESPOKE DESIGNS ◇</span><span>SINCE 1998 ◇</span>
+    </div>
+  </div>
+
+  <!-- COLLECTIONS -->
+  <section class="collections" id="collections">
+    <div class="section-header">
+      <p class="section-eyebrow reveal">Our Collections</p>
+      <h2 class="section-title reveal">Curated Excellence</h2>
+    </div>
+
+    <div class="collection-grid">
+
+      <!-- Card 1 -->
+      <div class="collection-card reveal" data-tilt>
+        <div class="card-inner">
+          <div class="card-3d-jewel ring-jewel">
+            <div class="jewel-ring">
+              <div class="jewel-band"></div>
+              <div class="jewel-stone"></div>
+              <div class="jewel-shine"></div>
+            </div>
+          </div>
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <p class="card-category">RINGS</p>
+            <h3>Celestial Band</h3>
+            <p class="card-desc">18K White Gold · Diamond Pavé</p>
+            <p class="card-price">From ₹85,000</p>
+            <button class="card-btn" onclick="addToCart('Celestial Band', 85000)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="collection-card reveal" data-tilt>
+        <div class="card-inner">
+          <div class="card-3d-jewel necklace-jewel">
+            <div class="jewel-necklace">
+              <div class="necklace-chain"></div>
+              <div class="necklace-pendant">
+                <div class="pendant-gem"></div>
+                <div class="pendant-shine"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <p class="card-category">NECKLACES</p>
+            <h3>Cascade Pendant</h3>
+            <p class="card-desc">22K Gold · Emerald Drop</p>
+            <p class="card-price">From ₹1,20,000</p>
+            <button class="card-btn" onclick="addToCart('Cascade Pendant', 120000)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="collection-card reveal" data-tilt>
+        <div class="card-inner">
+          <div class="card-3d-jewel earring-jewel">
+            <div class="jewel-earrings">
+              <div class="earring left-e">
+                <div class="earring-hook"></div>
+                <div class="earring-drop">
+                  <div class="earring-gem"></div>
+                </div>
+              </div>
+              <div class="earring right-e">
+                <div class="earring-hook"></div>
+                <div class="earring-drop">
+                  <div class="earring-gem"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <p class="card-category">EARRINGS</p>
+            <h3>Aurora Drops</h3>
+            <p class="card-desc">18K Rose Gold · Ruby Teardrop</p>
+            <p class="card-price">From ₹65,000</p>
+            <button class="card-btn" onclick="addToCart('Aurora Drops', 65000)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="collection-card reveal" data-tilt>
+        <div class="card-inner">
+          <div class="card-3d-jewel bracelet-jewel">
+            <div class="jewel-bracelet">
+              <div class="bracelet-band">
+                <div class="bracelet-gem g1"></div>
+                <div class="bracelet-gem g2"></div>
+                <div class="bracelet-gem g3"></div>
+                <div class="bracelet-gem g4"></div>
+                <div class="bracelet-gem g5"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <p class="card-category">BRACELETS</p>
+            <h3>Galaxie Bangle</h3>
+            <p class="card-desc">18K Gold · Sapphire Tennis</p>
+            <p class="card-price">From ₹95,000</p>
+            <button class="card-btn" onclick="addToCart('Galaxie Bangle', 95000)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FEATURED -->
+  <section class="featured" id="featured">
+    <div class="featured-bg-text">LUMIÈRE</div>
+    <div class="featured-inner">
+      <div class="featured-jewel">
+        <!-- 3D Rotating Diamond -->
+        <div class="diamond-showcase">
+          <div class="diamond-3d-big" id="bigDiamond">
+            <div class="d-face top"></div>
+            <div class="d-face fl"></div>
+            <div class="d-face fr"></div>
+            <div class="d-face bl"></div>
+            <div class="d-face br"></div>
+            <div class="d-face bottom"></div>
+            <div class="d-sparkle ds1">✦</div>
+            <div class="d-sparkle ds2">✦</div>
+            <div class="d-sparkle ds3">✦</div>
+          </div>
+          <div class="diamond-glow"></div>
+          <div class="diamond-reflection"></div>
+        </div>
+      </div>
+      <div class="featured-text">
+        <p class="section-eyebrow reveal">Piece of the Season</p>
+        <h2 class="featured-title reveal">The Lumière<br><em>Heritage Diamond</em></h2>
+        <p class="featured-desc reveal">A 5.2-carat D-grade diamond set in a hand-forged platinum crown. Each facet cut by master craftsmen over 120 hours to achieve perfect light dispersion.</p>
+        <ul class="featured-specs reveal">
+          <li><span>Cut</span> Brilliant Round</li>
+          <li><span>Carat</span> 5.2 ct</li>
+          <li><span>Clarity</span> VS1</li>
+          <li><span>Color</span> D-Grade</li>
+          <li><span>Setting</span> Platinum Prong</li>
+        </ul>
+        <div class="featured-price reveal">
+          <p>Starting at <strong>₹45,00,000</strong></p>
+          <button class="btn-primary" onclick="addToCart('Heritage Diamond Ring', 4500000)">Reserve This Piece</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="stat reveal">
+      <h3 class="stat-num" data-target="25">0</h3>
+      <p>Years of Craftsmanship</p>
+    </div>
+    <div class="stat reveal">
+      <h3 class="stat-num" data-target="12000">0</h3>
+      <p>Happy Customers</p>
+    </div>
+    <div class="stat reveal">
+      <h3 class="stat-num" data-target="850">0</h3>
+      <p>Unique Designs</p>
+    </div>
+    <div class="stat reveal">
+      <h3 class="stat-num" data-target="18">0</h3>
+      <p>International Awards</p>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="atelier-3d">
+          <div class="atelier-box">
+            <div class="atelier-face front">
+              <div class="atelier-diamond">◆</div>
+              <p>EST. 1998</p>
+            </div>
+            <div class="atelier-face back">LUMIÈRE</div>
+            <div class="atelier-face left"></div>
+            <div class="atelier-face right"></div>
+            <div class="atelier-face top"></div>
+            <div class="atelier-face bottom"></div>
+          </div>
+        </div>
+        <div class="about-accent-ring ar1"></div>
+        <div class="about-accent-ring ar2"></div>
+      </div>
+      <div class="about-content">
+        <p class="section-eyebrow reveal">Our Atelier</p>
+        <h2 class="section-title reveal">Where Art Meets<br><em>Precious Metal</em></h2>
+        <p class="about-para reveal">Founded in Paris in 1998, Lumière has grown from a single craftsman's workshop into a globally celebrated jewellery house. Our commitment remains unchanged: every piece must be worthy of becoming a heirloom.</p>
+        <p class="about-para reveal">We source only ethically certified gemstones and use traditional goldsmithing techniques passed down through generations — updated with modern precision tools.</p>
+        <div class="about-badges reveal">
+          <div class="badge">◇ GIA Certified</div>
+          <div class="badge">◇ Ethical Sourcing</div>
+          <div class="badge">◇ Hallmarked 18K</div>
+          <div class="badge">◇ BIS Certified</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="section-header">
+      <p class="section-eyebrow reveal">Stories</p>
+      <h2 class="section-title reveal">Worn with Love</h2>
+    </div>
+    <div class="testimonial-track" id="testimonialTrack">
+      <div class="testimonial-card">
+        <div class="stars">✦ ✦ ✦ ✦ ✦</div>
+        <p>"My engagement ring from Lumière is the most beautiful thing I own. The craftsmanship is unlike anything I've seen."</p>
+        <cite>— Priya M., Hyderabad</cite>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">✦ ✦ ✦ ✦ ✦</div>
+        <p>"I gifted my mother the Cascade pendant for her 60th. She said it was the finest gift she'd ever received. Worth every rupee."</p>
+        <cite>— Arjun S., Mumbai</cite>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">✦ ✦ ✦ ✦ ✦</div>
+        <p>"The bespoke service is extraordinary. They understood exactly what I envisioned and created something beyond imagination."</p>
+        <cite>— Meera K., Bangalore</cite>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">✦ ✦ ✦ ✦ ✦</div>
+        <p>"Exceptional quality, timeless design. The Galaxie Bangle draws compliments every single day."</p>
+        <cite>— Rohini T., Delhi</cite>
+      </div>
+    </div>
+    <div class="testimonial-dots" id="testimonialDots"></div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+      <div class="contact-text">
+        <p class="section-eyebrow reveal">Get in Touch</p>
+        <h2 class="section-title reveal">Visit Our<br><em>Showrooms</em></h2>
+        <div class="showrooms reveal">
+          <div class="showroom">
+            <p class="showroom-city">Hyderabad</p>
+            <p>Banjara Hills, Road No. 12</p>
+            <p>Mon–Sat: 10AM – 8PM</p>
+            <p>+91 40 1234 5678</p>
+          </div>
+          <div class="showroom">
+            <p class="showroom-city">Mumbai</p>
+            <p>Peddar Road, Breach Candy</p>
+            <p>Mon–Sat: 10AM – 8PM</p>
+            <p>+91 22 1234 5678</p>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form reveal">
+        <h3>Book a Consultation</h3>
+        <div class="form-group">
+          <input type="text" placeholder="Your Name" id="cname"/>
+          <label>Name</label>
+        </div>
+        <div class="form-group">
+          <input type="email" placeholder="Your Email" id="cemail"/>
+          <label>Email</label>
+        </div>
+        <div class="form-group">
+          <input type="text" placeholder="Phone Number" id="cphone"/>
+          <label>Phone</label>
+        </div>
+        <div class="form-group">
+          <select id="cservice">
+            <option value="">Select Service</option>
+            <option>Engagement Ring Consultation</option>
+            <option>Bespoke Design</option>
+            <option>Jewellery Repair</option>
+            <option>Valuation</option>
+          </select>
+        </div>
+        <button class="btn-primary full-width" onclick="submitForm()">Book Appointment</button>
+        <div class="form-success" id="formSuccess">
+          <p>✦ Your appointment has been booked. We will contact you shortly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <p class="footer-logo">LUMIÈRE</p>
+        <p>Fine Jewellery since 1998</p>
+        <div class="footer-social">
+          <a href="#">Instagram</a>
+          <a href="#">Pinterest</a>
+          <a href="#">WhatsApp</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>Collections</h4>
+          <a href="#">Rings</a>
+          <a href="#">Necklaces</a>
+          <a href="#">Earrings</a>
+          <a href="#">Bracelets</a>
+        </div>
+        <div>
+          <h4>Services</h4>
+          <a href="#">Bespoke Design</a>
+          <a href="#">Repairs</a>
+          <a href="#">Valuation</a>
+          <a href="#">Gift Cards</a>
+        </div>
+        <div>
+          <h4>Information</h4>
+          <a href="#">Our Story</a>
+          <a href="#">Sustainability</a>
+          <a href="#">Certifications</a>
+          <a href="#">Care Guide</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Lumière Fine Jewellery. All rights reserved. | Designed for AWS Deployment</p>
+    </div>
+  </footer>
+
+  <!-- CART MODAL -->
+  <div class="cart-modal" id="cartModal">
+    <div class="cart-inner">
+      <div class="cart-header">
+        <h3>Your Selection</h3>
+        <button onclick="closeCart()">✕</button>
+      </div>
+      <div class="cart-items" id="cartItems">
+        <p class="cart-empty">Your cart is empty</p>
+      </div>
+      <div class="cart-footer" id="cartFooter" style="display:none">
+        <p>Total: <strong id="cartTotal">₹0</strong></p>
+        <button class="btn-primary full-width" onclick="checkout()">Proceed to Checkout</button>
+      </div>
+    </div>
+  </div>
+  <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
