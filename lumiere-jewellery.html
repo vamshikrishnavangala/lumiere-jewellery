@@ -1,0 +1,2147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LUMIÈRE — Fine Jewellery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;300;400&display=swap" rel="stylesheet">
+  <style>
+/* =============================================
+   LUMIÈRE — Fine Jewellery
+   3D Jewelry Website Stylesheet
+   ============================================= */
+
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8C97A;
+  --gold-dark: #8B6914;
+  --cream: #FAF7F2;
+  --charcoal: #1A1410;
+  --warm-dark: #0D0A06;
+  --text: #2C2318;
+  --text-muted: #8A7A6A;
+  --white: #FFFFFF;
+  --ruby: #8B0000;
+  --sapphire: #0F3460;
+  --emerald: #1B4D3E;
+}
+
+*, *::before, *::after {
+  margin: 0; padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Josefin Sans', sans-serif;
+  background: var(--warm-dark);
+  color: var(--cream);
+  cursor: none;
+  overflow-x: hidden;
+}
+
+/* =================== CURSOR =================== */
+.cursor {
+  width: 8px; height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background 0.2s;
+}
+.cursor-follower {
+  width: 30px; height: 30px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.12s ease-out, width 0.2s, height 0.2s;
+  opacity: 0.6;
+}
+body:has(button:hover) .cursor,
+body:has(a:hover) .cursor {
+  width: 20px; height: 20px;
+  background: var(--gold-light);
+}
+
+/* =================== LOADER =================== */
+.loader {
+  position: fixed;
+  inset: 0;
+  background: var(--warm-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9000;
+  transition: opacity 0.8s ease, visibility 0.8s;
+}
+.loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+.loader-diamond {
+  margin-bottom: 30px;
+}
+.loader-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  letter-spacing: 12px;
+  color: var(--gold);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Diamond 3D (loader) */
+.diamond-3d {
+  width: 60px; height: 60px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: spinDiamond 2s linear infinite;
+}
+.diamond-3d .face {
+  position: absolute;
+  width: 0; height: 0;
+}
+.diamond-3d .top {
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-bottom: 25px solid var(--gold-light);
+  top: 0; left: 0;
+  opacity: 0.9;
+}
+.diamond-3d .left {
+  border-top: 25px solid var(--gold-dark);
+  border-right: 30px solid transparent;
+  bottom: 0; left: 0;
+  opacity: 0.7;
+}
+.diamond-3d .right {
+  border-top: 25px solid var(--gold);
+  border-left: 30px solid transparent;
+  bottom: 0; right: 0;
+  opacity: 0.8;
+}
+.diamond-3d .bottom {
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-top: 10px solid var(--gold-dark);
+  bottom: -5px; left: 0;
+  opacity: 0.6;
+}
+
+/* =================== NAVIGATION =================== */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  padding: 24px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 800;
+  transition: background 0.4s, padding 0.4s;
+}
+.nav.scrolled {
+  background: rgba(13, 10, 6, 0.95);
+  backdrop-filter: blur(20px);
+  padding: 16px 60px;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  letter-spacing: 8px;
+  color: var(--gold);
+  font-weight: 300;
+}
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--cream);
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 300;
+  transition: color 0.3s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cart {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  color: var(--gold);
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+.cart-icon { font-size: 18px; }
+.cart-count {
+  background: var(--gold);
+  color: var(--warm-dark);
+  border-radius: 50%;
+  width: 18px; height: 18px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+}
+.nav-cart:hover { opacity: 0.8; }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+.hamburger span {
+  width: 24px; height: 1px;
+  background: var(--gold);
+  transition: all 0.3s;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--warm-dark);
+  z-index: 700;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.mobile-menu.active { display: flex; }
+.mobile-menu ul { list-style: none; text-align: center; }
+.mobile-menu ul li { margin: 20px 0; }
+.mobile-menu ul a {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  color: var(--cream);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.mobile-menu ul a:hover { color: var(--gold); }
+
+/* =================== HERO =================== */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 60% 40%, #1a1205 0%, var(--warm-dark) 70%);
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.particle {
+  position: absolute;
+  width: 2px; height: 2px;
+  background: var(--gold-light);
+  border-radius: 50%;
+  animation: float var(--dur, 8s) ease-in-out infinite;
+  animation-delay: calc(var(--i) * -1.2s);
+  left: calc(var(--i) * 12% + 5%);
+  top: calc(var(--i) * 11% + 10%);
+  opacity: 0.6;
+}
+.particle:nth-child(odd) { width: 3px; height: 3px; }
+.particle:nth-child(3n) { background: rgba(201,168,76,0.3); width: 1px; height: 1px; }
+
+/* Hero 3D Ring */
+.hero-3d-container {
+  position: absolute;
+  right: 8%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 420px; height: 420px;
+  perspective: 800px;
+}
+.ring-scene {
+  width: 100%; height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ring-3d {
+  width: 260px; height: 260px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: rotateRing 8s linear infinite;
+}
+.ring-band {
+  position: absolute;
+  inset: 0;
+  border: 28px solid transparent;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow:
+    0 0 0 4px var(--gold),
+    0 0 0 28px rgba(201,168,76,0.15),
+    inset 0 0 30px rgba(201,168,76,0.1),
+    0 20px 60px rgba(201,168,76,0.3);
+  border: 28px solid var(--gold);
+  background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark), var(--gold));
+  -webkit-mask: radial-gradient(circle at center, transparent 46%, black 47%);
+  mask: radial-gradient(circle at center, transparent 46%, black 47%);
+}
+.ring-gem {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -100px) translateZ(30px);
+  width: 50px; height: 50px;
+}
+.gem-face {
+  position: absolute;
+  background: linear-gradient(135deg, #a8d8ff, #60b4ff, #1a8cff, #0066cc);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  width: 50px; height: 50px;
+}
+.gem-face.f1 { background: rgba(168, 216, 255, 0.9); transform: translateZ(5px); }
+.gem-face.f2 { background: rgba(96, 180, 255, 0.8); transform: rotateY(60deg) translateZ(5px); }
+.gem-face.f3 { background: rgba(26, 140, 255, 0.9); transform: rotateY(-60deg) translateZ(5px); }
+.gem-face.f4 { background: rgba(0, 102, 204, 0.7); transform: rotateX(60deg) translateZ(5px); }
+.gem-face.f5 { background: rgba(0, 60, 150, 0.8); transform: rotateX(-60deg) translateZ(5px); }
+.gem-face.f6 { background: rgba(168, 216, 255, 0.5); }
+.gem-sparkle {
+  position: absolute;
+  color: #fff;
+  font-size: 8px;
+  animation: sparkle 2s ease-in-out infinite;
+}
+.gem-sparkle.s1 { top: -15px; left: 50%; animation-delay: 0s; }
+.gem-sparkle.s2 { top: 50%; right: -15px; animation-delay: 0.6s; }
+.gem-sparkle.s3 { bottom: -15px; left: 30%; animation-delay: 1.2s; }
+.ring-shadow {
+  position: absolute;
+  bottom: 20px;
+  width: 200px; height: 30px;
+  background: radial-gradient(ellipse, rgba(201,168,76,0.3) 0%, transparent 70%);
+  filter: blur(10px);
+  animation: shadowPulse 8s linear infinite;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  padding: 0 60px;
+  max-width: 55%;
+}
+.hero-sub {
+  font-size: 10px;
+  letter-spacing: 5px;
+  color: var(--gold);
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 7vw, 96px);
+  font-weight: 300;
+  line-height: 1.05;
+  margin-bottom: 24px;
+  opacity: 0;
+  transform: translateY(30px);
+}
+.hero-title em {
+  color: var(--gold);
+  font-style: italic;
+  display: block;
+}
+.hero-desc {
+  font-size: 14px;
+  line-height: 1.8;
+  color: rgba(250,247,242,0.7);
+  max-width: 440px;
+  margin-bottom: 40px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.hero-cta {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.reveal.visible {
+  animation: revealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.reveal:nth-child(2).visible { animation-delay: 0.1s; }
+.reveal:nth-child(3).visible { animation-delay: 0.2s; }
+.reveal:nth-child(4).visible { animation-delay: 0.3s; }
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: var(--warm-dark);
+  border: none;
+  padding: 14px 36px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  font-weight: 600;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(201,168,76,0.4); }
+.btn-primary:hover::before { opacity: 1; }
+.btn-primary span { position: relative; z-index: 1; }
+.btn-ghost {
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 14px 36px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.3s, color 0.3s;
+}
+.btn-ghost:hover { background: rgba(201,168,76,0.1); }
+.full-width { width: 100%; text-align: center; }
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px; left: 60px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+}
+.scroll-line {
+  width: 40px; height: 1px;
+  background: var(--gold);
+  animation: scrollLine 2s ease-in-out infinite;
+  transform-origin: left;
+}
+
+/* =================== MARQUEE =================== */
+.marquee-strip {
+  background: var(--gold);
+  padding: 14px 0;
+  overflow: hidden;
+}
+.marquee-track {
+  display: flex;
+  gap: 0;
+  animation: marquee 30s linear infinite;
+  white-space: nowrap;
+}
+.marquee-track span {
+  display: inline-block;
+  padding: 0 30px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--warm-dark);
+  font-weight: 600;
+}
+
+/* =================== COLLECTIONS =================== */
+.collections {
+  padding: 120px 60px;
+  background: var(--charcoal);
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 70px;
+}
+.section-eyebrow {
+  font-size: 10px;
+  letter-spacing: 5px;
+  color: var(--gold);
+  margin-bottom: 12px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 300;
+  line-height: 1.1;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.section-title em {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.collection-card {
+  perspective: 1000px;
+  opacity: 0;
+  transform: translateY(40px);
+}
+.card-inner {
+  position: relative;
+  border: 1px solid rgba(201,168,76,0.1);
+  background: linear-gradient(145deg, #1a1410, #0d0a06);
+  overflow: hidden;
+  height: 420px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+.card-inner:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 30px rgba(201,168,76,0.1);
+  border-color: rgba(201,168,76,0.3);
+}
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(13,10,6,0.95) 0%, transparent 60%);
+  z-index: 2;
+}
+.card-content {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 30px;
+  z-index: 3;
+}
+.card-category {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.card-content h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+.card-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+.card-price {
+  font-size: 13px;
+  color: var(--gold);
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+}
+.card-btn {
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 8px 20px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s, transform 0.3s, background 0.3s;
+}
+.card-inner:hover .card-btn {
+  opacity: 1;
+  transform: translateY(0);
+  background: var(--gold);
+  color: var(--warm-dark);
+}
+
+/* 3D Jewel Displays in Cards */
+.card-3d-jewel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 40px;
+}
+
+/* Ring Jewel */
+.jewel-ring {
+  width: 120px; height: 120px;
+  position: relative;
+  animation: floatJewel 4s ease-in-out infinite;
+}
+.jewel-band {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 20px solid var(--gold);
+  background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+  -webkit-mask: radial-gradient(circle at center, transparent 42%, black 43%);
+  mask: radial-gradient(circle at center, transparent 42%, black 43%);
+  box-shadow: 0 0 30px rgba(201,168,76,0.4), inset 0 0 20px rgba(201,168,76,0.1);
+  animation: ringGlow 3s ease-in-out infinite;
+}
+.jewel-stone {
+  position: absolute;
+  top: 2px; left: 50%;
+  transform: translateX(-50%);
+  width: 28px; height: 28px;
+  background: radial-gradient(circle at 35% 35%, #a8d8ff, #0066cc, #002b70);
+  clip-path: polygon(50% 0%, 100% 40%, 80% 100%, 20% 100%, 0% 40%);
+  box-shadow: 0 0 20px rgba(100,160,255,0.6);
+}
+.jewel-shine {
+  position: absolute;
+  top: 8px; left: 50%;
+  transform: translateX(-40%);
+  width: 8px; height: 8px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 50%;
+  filter: blur(2px);
+}
+
+/* Necklace Jewel */
+.jewel-necklace {
+  width: 140px; height: 140px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: floatJewel 5s ease-in-out infinite;
+}
+.necklace-chain {
+  width: 100px; height: 60px;
+  border: 2px solid var(--gold);
+  border-bottom: none;
+  border-radius: 60px 60px 0 0;
+  box-shadow: 0 0 10px rgba(201,168,76,0.3);
+}
+.necklace-pendant {
+  position: relative;
+  width: 40px; height: 50px;
+  background: linear-gradient(135deg, #2ecc71, #1a8a4a, #0d5c30);
+  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+  box-shadow: 0 0 20px rgba(46,204,113,0.5);
+  margin-top: -1px;
+}
+.pendant-shine {
+  position: absolute;
+  top: 8px; left: 10px;
+  width: 10px; height: 10px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 50%;
+  filter: blur(3px);
+}
+
+/* Earring Jewel */
+.jewel-earrings {
+  display: flex;
+  gap: 40px;
+  animation: floatJewel 4.5s ease-in-out infinite;
+}
+.earring {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.earring-hook {
+  width: 20px; height: 30px;
+  border: 2px solid var(--gold);
+  border-bottom: none;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 0 8px rgba(201,168,76,0.3);
+}
+.earring-drop {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.earring-gem {
+  width: 18px; height: 40px;
+  background: radial-gradient(circle at 35% 30%, #ff8a8a, #cc0000, #6b0000);
+  clip-path: polygon(50% 0%, 100% 30%, 50% 100%, 0% 30%);
+  box-shadow: 0 0 15px rgba(204,0,0,0.6);
+  animation: gemPulse 2s ease-in-out infinite;
+}
+
+/* Bracelet Jewel */
+.jewel-bracelet {
+  animation: floatJewel 3.5s ease-in-out infinite;
+}
+.bracelet-band {
+  width: 140px; height: 30px;
+  background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-light), var(--gold), var(--gold-dark));
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 0 10px;
+  box-shadow: 0 0 20px rgba(201,168,76,0.4), 0 5px 15px rgba(0,0,0,0.5);
+}
+.bracelet-gem {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #80b3ff, #0055cc, #002266);
+  box-shadow: 0 0 10px rgba(0,85,204,0.7);
+  animation: gemPulse 1.5s ease-in-out infinite;
+}
+.bracelet-gem.g2 { animation-delay: 0.3s; }
+.bracelet-gem.g3 { animation-delay: 0.6s; }
+.bracelet-gem.g4 { animation-delay: 0.9s; }
+.bracelet-gem.g5 { animation-delay: 1.2s; }
+
+/* =================== FEATURED =================== */
+.featured {
+  padding: 140px 60px;
+  background: var(--warm-dark);
+  position: relative;
+  overflow: hidden;
+}
+.featured-bg-text {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20vw;
+  font-weight: 300;
+  color: rgba(201,168,76,0.03);
+  white-space: nowrap;
+  pointer-events: none;
+  letter-spacing: 20px;
+}
+.featured-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.diamond-showcase {
+  position: relative;
+  width: 300px; height: 300px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.diamond-3d-big {
+  width: 160px; height: 160px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: spinDiamond 6s linear infinite;
+}
+.d-face {
+  position: absolute;
+  width: 0; height: 0;
+}
+.d-face.top {
+  border-left: 80px solid transparent;
+  border-right: 80px solid transparent;
+  border-bottom: 70px solid rgba(201,168,76,0.9);
+  top: 0; left: 0;
+  filter: drop-shadow(0 0 10px rgba(201,168,76,0.5));
+}
+.d-face.fl {
+  border-top: 70px solid rgba(201,168,76,0.5);
+  border-right: 80px solid transparent;
+  bottom: 30px; left: 0;
+}
+.d-face.fr {
+  border-top: 70px solid rgba(201,168,76,0.7);
+  border-left: 80px solid transparent;
+  bottom: 30px; right: 0;
+}
+.d-face.bl {
+  border-top: 40px solid rgba(180,140,40,0.4);
+  border-right: 80px solid transparent;
+  bottom: 0; left: 0;
+}
+.d-face.br {
+  border-top: 40px solid rgba(230,200,100,0.5);
+  border-left: 80px solid transparent;
+  bottom: 0; right: 0;
+}
+.d-face.bottom {
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  border-top: 30px solid rgba(201,168,76,0.3);
+  bottom: 0; left: 40px;
+}
+.d-sparkle {
+  position: absolute;
+  color: var(--gold-light);
+  animation: sparkle 2.5s ease-in-out infinite;
+}
+.d-sparkle.ds1 { top: -30px; left: -20px; animation-delay: 0s; font-size: 14px; }
+.d-sparkle.ds2 { top: 40px; right: -30px; animation-delay: 0.8s; font-size: 10px; }
+.d-sparkle.ds3 { bottom: -20px; left: 10px; animation-delay: 1.6s; font-size: 12px; }
+.diamond-glow {
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
+  animation: glowPulse 3s ease-in-out infinite;
+}
+.diamond-reflection {
+  position: absolute;
+  bottom: -20px;
+  width: 140px; height: 20px;
+  background: radial-gradient(ellipse, rgba(201,168,76,0.3), transparent);
+  filter: blur(8px);
+}
+.featured-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 4.5vw, 56px);
+  font-weight: 300;
+  line-height: 1.15;
+  margin-bottom: 24px;
+  opacity: 0;
+  transform: translateY(30px);
+}
+.featured-title em { color: var(--gold); font-style: italic; }
+.featured-desc {
+  font-size: 14px;
+  line-height: 1.9;
+  color: rgba(250,247,242,0.65);
+  margin-bottom: 32px;
+  font-weight: 300;
+  letter-spacing: 0.3px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.featured-specs {
+  list-style: none;
+  margin-bottom: 36px;
+  border-top: 1px solid rgba(201,168,76,0.2);
+  padding-top: 24px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.featured-specs li {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+.featured-specs li span {
+  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.featured-price {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.featured-price p {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+}
+.featured-price strong {
+  color: var(--gold);
+  font-size: 24px;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+}
+
+/* =================== STATS =================== */
+.stats {
+  padding: 80px 60px;
+  background: var(--gold);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  text-align: center;
+}
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 56px;
+  font-weight: 300;
+  color: var(--warm-dark);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.stat p {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--warm-dark);
+  opacity: 0.7;
+}
+.stat { opacity: 0; transform: translateY(20px); }
+
+/* =================== ABOUT =================== */
+.about {
+  padding: 140px 60px;
+  background: var(--charcoal);
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: center;
+}
+.about-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+.atelier-3d {
+  perspective: 800px;
+}
+.atelier-box {
+  width: 200px; height: 200px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: rotateCube 12s linear infinite;
+}
+.atelier-face {
+  position: absolute;
+  width: 200px; height: 200px;
+  border: 1px solid rgba(201,168,76,0.3);
+  background: rgba(201,168,76,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+}
+.atelier-face.front { transform: translateZ(100px); background: rgba(201,168,76,0.08); }
+.atelier-face.back { transform: rotateY(180deg) translateZ(100px); }
+.atelier-face.left { transform: rotateY(-90deg) translateZ(100px); }
+.atelier-face.right { transform: rotateY(90deg) translateZ(100px); }
+.atelier-face.top { transform: rotateX(90deg) translateZ(100px); }
+.atelier-face.bottom { transform: rotateX(-90deg) translateZ(100px); }
+.atelier-diamond { font-size: 48px; color: var(--gold); display: block; margin-bottom: 8px; text-align: center; }
+.atelier-face.front p { font-size: 12px; letter-spacing: 4px; color: var(--gold); position: absolute; bottom: 40px; }
+.atelier-face.back { font-size: 14px; letter-spacing: 6px; color: var(--gold); }
+.about-accent-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.1);
+  animation: ringPulse 4s ease-in-out infinite;
+}
+.ar1 { width: 320px; height: 320px; animation-delay: 0s; }
+.ar2 { width: 420px; height: 420px; animation-delay: 1s; border-color: rgba(201,168,76,0.05); }
+
+.about-para {
+  font-size: 14px;
+  line-height: 1.9;
+  color: rgba(250,247,242,0.65);
+  margin-bottom: 20px;
+  font-weight: 300;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.about-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.badge {
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 8px 16px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  transition: background 0.3s;
+}
+.badge:hover { background: rgba(201,168,76,0.1); }
+
+/* =================== TESTIMONIALS =================== */
+.testimonials {
+  padding: 120px 60px;
+  background: var(--warm-dark);
+  overflow: hidden;
+}
+.testimonial-track {
+  display: flex;
+  gap: 30px;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.testimonial-card {
+  min-width: calc(50% - 15px);
+  border: 1px solid rgba(201,168,76,0.15);
+  padding: 50px 40px;
+  background: linear-gradient(135deg, rgba(201,168,76,0.04), transparent);
+  flex-shrink: 0;
+}
+.testimonial-card .stars {
+  color: var(--gold);
+  font-size: 14px;
+  letter-spacing: 5px;
+  margin-bottom: 20px;
+}
+.testimonial-card p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: 24px;
+  color: rgba(250,247,242,0.85);
+}
+.testimonial-card cite {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  font-style: normal;
+}
+.testimonial-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 40px;
+}
+.testimonial-dots .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(201,168,76,0.3);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+.testimonial-dots .dot.active {
+  background: var(--gold);
+  transform: scale(1.4);
+}
+
+/* =================== CONTACT =================== */
+.contact {
+  padding: 120px 60px;
+  background: var(--charcoal);
+}
+.contact-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.showrooms { margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+.showroom { opacity: 0; transform: translateY(20px); }
+.showroom-city {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  color: var(--gold);
+  margin-bottom: 10px;
+  font-style: italic;
+}
+.showroom p { font-size: 12px; line-height: 2; color: var(--text-muted); letter-spacing: 0.5px; }
+
+.contact-form {
+  background: rgba(201,168,76,0.04);
+  border: 1px solid rgba(201,168,76,0.12);
+  padding: 50px 40px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.contact-form h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 32px;
+  color: var(--gold);
+}
+.form-group {
+  position: relative;
+  margin-bottom: 24px;
+}
+.form-group input,
+.form-group select {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(201,168,76,0.25);
+  padding: 12px 0;
+  color: var(--cream);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.form-group input::placeholder,
+.form-group select option { color: transparent; }
+.form-group select option { background: var(--charcoal); color: var(--cream); }
+.form-group input:focus,
+.form-group select:focus { border-bottom-color: var(--gold); }
+.form-group label {
+  position: absolute;
+  top: 12px; left: 0;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  transition: top 0.3s, font-size 0.3s, color 0.3s;
+  pointer-events: none;
+}
+.form-group input:focus ~ label,
+.form-group input:not(:placeholder-shown) ~ label {
+  top: -10px;
+  font-size: 9px;
+  color: var(--gold);
+}
+.form-success {
+  display: none;
+  margin-top: 20px;
+  padding: 16px;
+  border: 1px solid rgba(201,168,76,0.3);
+  text-align: center;
+}
+.form-success p { font-size: 12px; letter-spacing: 1px; color: var(--gold); }
+
+/* =================== FOOTER =================== */
+.footer { background: var(--warm-dark); padding: 80px 60px 30px; }
+.footer-top {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 80px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+  margin-bottom: 30px;
+}
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  color: var(--gold);
+  letter-spacing: 8px;
+  margin-bottom: 12px;
+}
+.footer-brand p { font-size: 12px; color: var(--text-muted); margin-bottom: 24px; letter-spacing: 1px; }
+.footer-social { display: flex; gap: 20px; }
+.footer-social a { font-size: 10px; letter-spacing: 2px; color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
+.footer-social a:hover { color: var(--gold); }
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+.footer-links h4 {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.footer-links a {
+  display: block;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+  transition: color 0.3s;
+}
+.footer-links a:hover { color: var(--cream); }
+.footer-bottom { text-align: center; }
+.footer-bottom p { font-size: 10px; color: var(--text-muted); letter-spacing: 1px; }
+
+/* =================== CART MODAL =================== */
+.cart-modal {
+  position: fixed;
+  top: 0; right: -420px;
+  width: 420px; height: 100vh;
+  background: var(--charcoal);
+  z-index: 2000;
+  transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-left: 1px solid rgba(201,168,76,0.15);
+  display: flex;
+  flex-direction: column;
+}
+.cart-modal.open { right: 0; }
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 1999;
+  display: none;
+  backdrop-filter: blur(4px);
+}
+.cart-overlay.active { display: block; }
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+}
+.cart-header h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  color: var(--gold);
+  letter-spacing: 2px;
+}
+.cart-header button {
+  background: none;
+  border: 1px solid rgba(201,168,76,0.2);
+  color: var(--cream);
+  width: 32px; height: 32px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: border-color 0.3s, color 0.3s;
+}
+.cart-header button:hover { border-color: var(--gold); color: var(--gold); }
+.cart-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 30px;
+}
+.cart-empty {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 40px 0;
+  letter-spacing: 1px;
+}
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+}
+.cart-item-name { font-size: 13px; letter-spacing: 0.5px; }
+.cart-item-price { font-size: 13px; color: var(--gold); }
+.cart-item-remove {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 12px;
+  padding: 4px 8px;
+  transition: color 0.3s;
+}
+.cart-item-remove:hover { color: #ff6b6b; }
+.cart-footer {
+  padding: 24px 30px;
+  border-top: 1px solid rgba(201,168,76,0.1);
+}
+.cart-footer p {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+#cartTotal { color: var(--gold); font-family: 'Cormorant Garamond', serif; font-size: 22px; }
+
+/* =================== ANIMATIONS =================== */
+@keyframes revealUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes spinDiamond {
+  from { transform: rotateY(0deg) rotateX(15deg); }
+  to { transform: rotateY(360deg) rotateX(15deg); }
+}
+@keyframes rotateRing {
+  0% { transform: rotateY(0deg) rotateX(20deg); }
+  100% { transform: rotateY(360deg) rotateX(20deg); }
+}
+@keyframes rotateCube {
+  0% { transform: rotateX(-20deg) rotateY(0deg); }
+  100% { transform: rotateX(-20deg) rotateY(360deg); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.4; }
+  33% { transform: translateY(-30px) translateX(15px); opacity: 0.8; }
+  66% { transform: translateY(-15px) translateX(-10px); opacity: 0.5; }
+}
+@keyframes floatJewel {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+@keyframes gemPulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(100,160,255,0.5); }
+  50% { box-shadow: 0 0 20px rgba(100,160,255,0.9); }
+}
+@keyframes ringGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(201,168,76,0.3); }
+  50% { box-shadow: 0 0 40px rgba(201,168,76,0.6), 0 0 60px rgba(201,168,76,0.2); }
+}
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+@keyframes ringPulse {
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.05); opacity: 0.6; }
+}
+@keyframes shadowPulse {
+  0%, 100% { transform: scaleX(0.8); opacity: 0.4; }
+  50% { transform: scaleX(1.1); opacity: 0.7; }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes scrollLine {
+  0%, 100% { transform: scaleX(1); }
+  50% { transform: scaleX(0.4); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* =================== RESPONSIVE =================== */
+@media (max-width: 1200px) {
+  .collection-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-3d-container { width: 300px; height: 300px; right: 3%; }
+}
+@media (max-width: 900px) {
+  .nav { padding: 20px 30px; }
+  .nav.scrolled { padding: 14px 30px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .hero-content { padding: 0 30px; max-width: 100%; }
+  .hero-3d-container { display: none; }
+  .hero-title { font-size: clamp(40px, 10vw, 72px); }
+  .collections, .featured, .about, .contact, .stats, .testimonials { padding: 80px 30px; }
+  .featured-inner, .about-grid, .contact-inner { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .footer-top, .footer-links { grid-template-columns: 1fr; gap: 40px; }
+  .testimonial-card { min-width: calc(100% - 0px); }
+  .collection-grid { grid-template-columns: 1fr; }
+  .scroll-indicator { display: none; }
+  .cart-modal { width: 100%; right: -100%; }
+}
+@media (max-width: 600px) {
+  .hero-cta { flex-direction: column; }
+  .stats { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .showrooms { grid-template-columns: 1fr; }
+  .contact-form { padding: 30px 20px; }
+}
+
+</style>
+</head>
+<body>
+
+  <!-- CURSOR -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursor-follower"></div>
+
+  <!-- LOADER -->
+  <div class="loader" id="loader">
+    <div class="loader-diamond">
+      <div class="diamond-3d">
+        <div class="face top"></div>
+        <div class="face left"></div>
+        <div class="face right"></div>
+        <div class="face bottom"></div>
+      </div>
+    </div>
+    <p class="loader-text">LUMIÈRE</p>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-logo">LUMIÈRE</div>
+    <ul class="nav-links">
+      <li><a href="#collections">Collections</a></li>
+      <li><a href="#featured">Featured</a></li>
+      <li><a href="#about">Atelier</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-cart">
+      <span class="cart-icon">◇</span>
+      <span class="cart-count">0</span>
+    </div>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobile-menu">
+    <ul>
+      <li><a href="#collections" onclick="closeMobileMenu()">Collections</a></li>
+      <li><a href="#featured" onclick="closeMobileMenu()">Featured</a></li>
+      <li><a href="#about" onclick="closeMobileMenu()">Atelier</a></li>
+      <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="particle" style="--i:1"></div>
+      <div class="particle" style="--i:2"></div>
+      <div class="particle" style="--i:3"></div>
+      <div class="particle" style="--i:4"></div>
+      <div class="particle" style="--i:5"></div>
+      <div class="particle" style="--i:6"></div>
+      <div class="particle" style="--i:7"></div>
+      <div class="particle" style="--i:8"></div>
+    </div>
+
+    <!-- 3D Rotating Ring -->
+    <div class="hero-3d-container" id="hero3d">
+      <div class="ring-scene">
+        <div class="ring-3d" id="ring">
+          <div class="ring-band"></div>
+          <div class="ring-gem">
+            <div class="gem-face f1"></div>
+            <div class="gem-face f2"></div>
+            <div class="gem-face f3"></div>
+            <div class="gem-face f4"></div>
+            <div class="gem-face f5"></div>
+            <div class="gem-face f6"></div>
+            <div class="gem-sparkle s1"></div>
+            <div class="gem-sparkle s2"></div>
+            <div class="gem-sparkle s3"></div>
+          </div>
+        </div>
+        <div class="ring-shadow"></div>
+      </div>
+    </div>
+
+    <div class="hero-content">
+      <p class="hero-sub reveal">Paris · Mumbai · New York</p>
+      <h1 class="hero-title reveal">
+        <span>Crafted for</span>
+        <em>Eternity</em>
+      </h1>
+      <p class="hero-desc reveal">Each piece tells a story woven in gold, set with gems that capture light the way memory captures a moment.</p>
+      <div class="hero-cta reveal">
+        <a href="#collections" class="btn-primary">Explore Collection</a>
+        <a href="#about" class="btn-ghost">Our Story</a>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+      <span>SCROLL</span>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <span>18K GOLD ◇</span><span>ETHICALLY SOURCED ◇</span><span>HANDCRAFTED ◇</span>
+      <span>CERTIFIED DIAMONDS ◇</span><span>BESPOKE DESIGNS ◇</span><span>SINCE 1998 ◇</span>
+      <span>18K GOLD ◇</span><span>ETHICALLY SOURCED ◇</span><span>HANDCRAFTED ◇</span>
+      <span>CERTIFIED DIAMONDS ◇</span><span>BESPOKE DESIGNS ◇</span><span>SINCE 1998 ◇</span>
+    </div>
+  </div>
+
+  <!-- COLLECTIONS -->
+  <section class="collections" id="collections">
+    <div class="section-header">
+      <p class="section-eyebrow reveal">Our Collections</p>
+      <h2 class="section-title reveal">Curated Excellence</h2>
+    </div>
+
+    <div class="collection-grid">
+
+      <!-- Card 1 -->
+      <div class="collection-card reveal" data-tilt>
+        <div class="card-inner">
+          <div class="card-3d-jewel ring-jewel">
+            <div class="jewel-ring">
+              <div class="jewel-band"></div>
+              <div class="jewel-stone"></div>
+              <div class="jewel-shine"></div>
+            </div>
+          </div>
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <p class="card-category">RINGS</p>
+            <h3>Celestial Band</h3>
+            <p class="card-desc">18K White Gold · Diamond Pavé</p>
+            <p class="card-price">From ₹85,000</p>
+            <button class="card-btn" onclick="addToCart('Celestial Band', 85000)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="collection-card reveal" data-tilt>
+        <div class="card-inner">
+          <div class="card-3d-jewel necklace-jewel">
+            <div class="jewel-necklace">
+              <div class="necklace-chain"></div>
+              <div class="necklace-pendant">
+                <div class="pendant-gem"></div>
+                <div class="pendant-shine"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <p class="card-category">NECKLACES</p>
+            <h3>Cascade Pendant</h3>
+            <p class="card-desc">22K Gold · Emerald Drop</p>
+            <p class="card-price">From ₹1,20,000</p>
+            <button class="card-btn" onclick="addToCart('Cascade Pendant', 120000)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="collection-card reveal" data-tilt>
+        <div class="card-inner">
+          <div class="card-3d-jewel earring-jewel">
+            <div class="jewel-earrings">
+              <div class="earring left-e">
+                <div class="earring-hook"></div>
+                <div class="earring-drop">
+                  <div class="earring-gem"></div>
+                </div>
+              </div>
+              <div class="earring right-e">
+                <div class="earring-hook"></div>
+                <div class="earring-drop">
+                  <div class="earring-gem"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <p class="card-category">EARRINGS</p>
+            <h3>Aurora Drops</h3>
+            <p class="card-desc">18K Rose Gold · Ruby Teardrop</p>
+            <p class="card-price">From ₹65,000</p>
+            <button class="card-btn" onclick="addToCart('Aurora Drops', 65000)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="collection-card reveal" data-tilt>
+        <div class="card-inner">
+          <div class="card-3d-jewel bracelet-jewel">
+            <div class="jewel-bracelet">
+              <div class="bracelet-band">
+                <div class="bracelet-gem g1"></div>
+                <div class="bracelet-gem g2"></div>
+                <div class="bracelet-gem g3"></div>
+                <div class="bracelet-gem g4"></div>
+                <div class="bracelet-gem g5"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <p class="card-category">BRACELETS</p>
+            <h3>Galaxie Bangle</h3>
+            <p class="card-desc">18K Gold · Sapphire Tennis</p>
+            <p class="card-price">From ₹95,000</p>
+            <button class="card-btn" onclick="addToCart('Galaxie Bangle', 95000)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FEATURED -->
+  <section class="featured" id="featured">
+    <div class="featured-bg-text">LUMIÈRE</div>
+    <div class="featured-inner">
+      <div class="featured-jewel">
+        <!-- 3D Rotating Diamond -->
+        <div class="diamond-showcase">
+          <div class="diamond-3d-big" id="bigDiamond">
+            <div class="d-face top"></div>
+            <div class="d-face fl"></div>
+            <div class="d-face fr"></div>
+            <div class="d-face bl"></div>
+            <div class="d-face br"></div>
+            <div class="d-face bottom"></div>
+            <div class="d-sparkle ds1">✦</div>
+            <div class="d-sparkle ds2">✦</div>
+            <div class="d-sparkle ds3">✦</div>
+          </div>
+          <div class="diamond-glow"></div>
+          <div class="diamond-reflection"></div>
+        </div>
+      </div>
+      <div class="featured-text">
+        <p class="section-eyebrow reveal">Piece of the Season</p>
+        <h2 class="featured-title reveal">The Lumière<br><em>Heritage Diamond</em></h2>
+        <p class="featured-desc reveal">A 5.2-carat D-grade diamond set in a hand-forged platinum crown. Each facet cut by master craftsmen over 120 hours to achieve perfect light dispersion.</p>
+        <ul class="featured-specs reveal">
+          <li><span>Cut</span> Brilliant Round</li>
+          <li><span>Carat</span> 5.2 ct</li>
+          <li><span>Clarity</span> VS1</li>
+          <li><span>Color</span> D-Grade</li>
+          <li><span>Setting</span> Platinum Prong</li>
+        </ul>
+        <div class="featured-price reveal">
+          <p>Starting at <strong>₹45,00,000</strong></p>
+          <button class="btn-primary" onclick="addToCart('Heritage Diamond Ring', 4500000)">Reserve This Piece</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="stat reveal">
+      <h3 class="stat-num" data-target="25">0</h3>
+      <p>Years of Craftsmanship</p>
+    </div>
+    <div class="stat reveal">
+      <h3 class="stat-num" data-target="12000">0</h3>
+      <p>Happy Customers</p>
+    </div>
+    <div class="stat reveal">
+      <h3 class="stat-num" data-target="850">0</h3>
+      <p>Unique Designs</p>
+    </div>
+    <div class="stat reveal">
+      <h3 class="stat-num" data-target="18">0</h3>
+      <p>International Awards</p>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="atelier-3d">
+          <div class="atelier-box">
+            <div class="atelier-face front">
+              <div class="atelier-diamond">◆</div>
+              <p>EST. 1998</p>
+            </div>
+            <div class="atelier-face back">LUMIÈRE</div>
+            <div class="atelier-face left"></div>
+            <div class="atelier-face right"></div>
+            <div class="atelier-face top"></div>
+            <div class="atelier-face bottom"></div>
+          </div>
+        </div>
+        <div class="about-accent-ring ar1"></div>
+        <div class="about-accent-ring ar2"></div>
+      </div>
+      <div class="about-content">
+        <p class="section-eyebrow reveal">Our Atelier</p>
+        <h2 class="section-title reveal">Where Art Meets<br><em>Precious Metal</em></h2>
+        <p class="about-para reveal">Founded in Paris in 1998, Lumière has grown from a single craftsman's workshop into a globally celebrated jewellery house. Our commitment remains unchanged: every piece must be worthy of becoming a heirloom.</p>
+        <p class="about-para reveal">We source only ethically certified gemstones and use traditional goldsmithing techniques passed down through generations — updated with modern precision tools.</p>
+        <div class="about-badges reveal">
+          <div class="badge">◇ GIA Certified</div>
+          <div class="badge">◇ Ethical Sourcing</div>
+          <div class="badge">◇ Hallmarked 18K</div>
+          <div class="badge">◇ BIS Certified</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="section-header">
+      <p class="section-eyebrow reveal">Stories</p>
+      <h2 class="section-title reveal">Worn with Love</h2>
+    </div>
+    <div class="testimonial-track" id="testimonialTrack">
+      <div class="testimonial-card">
+        <div class="stars">✦ ✦ ✦ ✦ ✦</div>
+        <p>"My engagement ring from Lumière is the most beautiful thing I own. The craftsmanship is unlike anything I've seen."</p>
+        <cite>— Priya M., Hyderabad</cite>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">✦ ✦ ✦ ✦ ✦</div>
+        <p>"I gifted my mother the Cascade pendant for her 60th. She said it was the finest gift she'd ever received. Worth every rupee."</p>
+        <cite>— Arjun S., Mumbai</cite>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">✦ ✦ ✦ ✦ ✦</div>
+        <p>"The bespoke service is extraordinary. They understood exactly what I envisioned and created something beyond imagination."</p>
+        <cite>— Meera K., Bangalore</cite>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">✦ ✦ ✦ ✦ ✦</div>
+        <p>"Exceptional quality, timeless design. The Galaxie Bangle draws compliments every single day."</p>
+        <cite>— Rohini T., Delhi</cite>
+      </div>
+    </div>
+    <div class="testimonial-dots" id="testimonialDots"></div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+      <div class="contact-text">
+        <p class="section-eyebrow reveal">Get in Touch</p>
+        <h2 class="section-title reveal">Visit Our<br><em>Showrooms</em></h2>
+        <div class="showrooms reveal">
+          <div class="showroom">
+            <p class="showroom-city">Hyderabad</p>
+            <p>Banjara Hills, Road No. 12</p>
+            <p>Mon–Sat: 10AM – 8PM</p>
+            <p>+91 40 1234 5678</p>
+          </div>
+          <div class="showroom">
+            <p class="showroom-city">Mumbai</p>
+            <p>Peddar Road, Breach Candy</p>
+            <p>Mon–Sat: 10AM – 8PM</p>
+            <p>+91 22 1234 5678</p>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form reveal">
+        <h3>Book a Consultation</h3>
+        <div class="form-group">
+          <input type="text" placeholder="Your Name" id="cname"/>
+          <label>Name</label>
+        </div>
+        <div class="form-group">
+          <input type="email" placeholder="Your Email" id="cemail"/>
+          <label>Email</label>
+        </div>
+        <div class="form-group">
+          <input type="text" placeholder="Phone Number" id="cphone"/>
+          <label>Phone</label>
+        </div>
+        <div class="form-group">
+          <select id="cservice">
+            <option value="">Select Service</option>
+            <option>Engagement Ring Consultation</option>
+            <option>Bespoke Design</option>
+            <option>Jewellery Repair</option>
+            <option>Valuation</option>
+          </select>
+        </div>
+        <button class="btn-primary full-width" onclick="submitForm()">Book Appointment</button>
+        <div class="form-success" id="formSuccess">
+          <p>✦ Your appointment has been booked. We will contact you shortly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <p class="footer-logo">LUMIÈRE</p>
+        <p>Fine Jewellery since 1998</p>
+        <div class="footer-social">
+          <a href="#">Instagram</a>
+          <a href="#">Pinterest</a>
+          <a href="#">WhatsApp</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>Collections</h4>
+          <a href="#">Rings</a>
+          <a href="#">Necklaces</a>
+          <a href="#">Earrings</a>
+          <a href="#">Bracelets</a>
+        </div>
+        <div>
+          <h4>Services</h4>
+          <a href="#">Bespoke Design</a>
+          <a href="#">Repairs</a>
+          <a href="#">Valuation</a>
+          <a href="#">Gift Cards</a>
+        </div>
+        <div>
+          <h4>Information</h4>
+          <a href="#">Our Story</a>
+          <a href="#">Sustainability</a>
+          <a href="#">Certifications</a>
+          <a href="#">Care Guide</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Lumière Fine Jewellery. All rights reserved. | Designed for AWS Deployment</p>
+    </div>
+  </footer>
+
+  <!-- CART MODAL -->
+  <div class="cart-modal" id="cartModal">
+    <div class="cart-inner">
+      <div class="cart-header">
+        <h3>Your Selection</h3>
+        <button onclick="closeCart()">✕</button>
+      </div>
+      <div class="cart-items" id="cartItems">
+        <p class="cart-empty">Your cart is empty</p>
+      </div>
+      <div class="cart-footer" id="cartFooter" style="display:none">
+        <p>Total: <strong id="cartTotal">₹0</strong></p>
+        <button class="btn-primary full-width" onclick="checkout()">Proceed to Checkout</button>
+      </div>
+    </div>
+  </div>
+  <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+  <script>
+/* =============================================
+   LUMIÈRE — Fine Jewellery
+   Main JavaScript
+   ============================================= */
+
+// =================== LOADER ===================
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const loader = document.getElementById('loader');
+    loader.classList.add('hidden');
+    // Start hero animations
+    document.querySelectorAll('.hero .reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 150 + 300);
+    });
+  }, 1800);
+});
+
+// =================== CURSOR ===================
+const cursor = document.getElementById('cursor');
+const follower = document.getElementById('cursor-follower');
+let mouseX = 0, mouseY = 0;
+let followerX = 0, followerY = 0;
+
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  cursor.style.left = mouseX + 'px';
+  cursor.style.top = mouseY + 'px';
+});
+
+function animateFollower() {
+  followerX += (mouseX - followerX) * 0.1;
+  followerY += (mouseY - followerY) * 0.1;
+  follower.style.left = followerX + 'px';
+  follower.style.top = followerY + 'px';
+  requestAnimationFrame(animateFollower);
+}
+animateFollower();
+
+// Cursor scale on interactive elements
+document.querySelectorAll('a, button, [data-tilt]').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'translate(-50%, -50%) scale(2)';
+    follower.style.transform = 'translate(-50%, -50%) scale(1.5)';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+    follower.style.transform = 'translate(-50%, -50%) scale(1)';
+  });
+});
+
+// =================== NAVIGATION ===================
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+});
+
+// Hamburger
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+hamburger.addEventListener('click', () => {
+  mobileMenu.classList.toggle('active');
+  hamburger.classList.toggle('open');
+});
+
+function closeMobileMenu() {
+  mobileMenu.classList.remove('active');
+  hamburger.classList.remove('open');
+}
+
+// =================== SCROLL REVEAL ===================
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      // Stagger within parent
+      const siblings = entry.target.parentElement.querySelectorAll('.reveal');
+      let delay = 0;
+      siblings.forEach((sib, idx) => {
+        if (sib === entry.target) delay = idx * 120;
+      });
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, delay);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal').forEach(el => {
+  if (!el.closest('.hero')) observer.observe(el);
+});
+
+// =================== PARALLAX HERO ===================
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  const hero3d = document.getElementById('hero3d');
+  if (hero3d && scrollY < window.innerHeight) {
+    hero3d.style.transform = `translateY(calc(-50% + ${scrollY * 0.3}px))`;
+  }
+});
+
+// =================== 3D CARD TILT ===================
+document.querySelectorAll('[data-tilt]').forEach(card => {
+  const inner = card.querySelector('.card-inner');
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    const rotateX = (-y / rect.height) * 12;
+    const rotateY = (x / rect.width) * 12;
+    inner.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    inner.style.transform = '';
+  });
+});
+
+// =================== COUNTER ANIMATION ===================
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = parseInt(el.dataset.target);
+      let current = 0;
+      const increment = target / 60;
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        el.textContent = Math.floor(current).toLocaleString() + (target >= 1000 ? '+' : '+');
+      }, 25);
+      counterObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.stat-num').forEach(el => counterObserver.observe(el));
+
+// =================== TESTIMONIAL SLIDER ===================
+const track = document.getElementById('testimonialTrack');
+const cards = track.querySelectorAll('.testimonial-card');
+const dotsContainer = document.getElementById('testimonialDots');
+let currentSlide = 0;
+let autoSlide;
+
+// Create dots
+cards.forEach((_, i) => {
+  const dot = document.createElement('div');
+  dot.classList.add('dot');
+  if (i === 0) dot.classList.add('active');
+  dot.addEventListener('click', () => goToSlide(i));
+  dotsContainer.appendChild(dot);
+});
+
+function goToSlide(index) {
+  const isMobile = window.innerWidth <= 900;
+  const cardWidth = isMobile ? track.parentElement.offsetWidth : track.parentElement.offsetWidth / 2;
+  track.style.transform = `translateX(-${index * (cardWidth + (isMobile ? 0 : 30))}px)`;
+  document.querySelectorAll('.testimonial-dots .dot').forEach((d, i) => {
+    d.classList.toggle('active', i === index);
+  });
+  currentSlide = index;
+}
+
+function nextSlide() {
+  const maxSlide = window.innerWidth <= 900 ? cards.length - 1 : cards.length - 2;
+  currentSlide = (currentSlide + 1) % (maxSlide + 1);
+  goToSlide(currentSlide);
+}
+
+autoSlide = setInterval(nextSlide, 4000);
+track.addEventListener('mouseenter', () => clearInterval(autoSlide));
+track.addEventListener('mouseleave', () => { autoSlide = setInterval(nextSlide, 4000); });
+
+// =================== CART ===================
+let cartItems = [];
+let cartCount = 0;
+
+function addToCart(name, price) {
+  const existingIdx = cartItems.findIndex(item => item.name === name);
+  if (existingIdx >= 0) {
+    cartItems[existingIdx].qty++;
+  } else {
+    cartItems.push({ name, price, qty: 1 });
+  }
+  cartCount++;
+  document.querySelector('.cart-count').textContent = cartCount;
+
+  // Animate cart icon
+  const cartIcon = document.querySelector('.nav-cart');
+  cartIcon.style.transform = 'scale(1.3)';
+  setTimeout(() => { cartIcon.style.transform = ''; }, 300);
+
+  renderCart();
+  openCart();
+}
+
+function renderCart() {
+  const container = document.getElementById('cartItems');
+  const footer = document.getElementById('cartFooter');
+
+  if (cartItems.length === 0) {
+    container.innerHTML = '<p class="cart-empty">Your cart is empty</p>';
+    footer.style.display = 'none';
+    return;
+  }
+
+  let total = 0;
+  container.innerHTML = cartItems.map((item, i) => {
+    total += item.price * item.qty;
+    return `
+      <div class="cart-item">
+        <div>
+          <div class="cart-item-name">${item.name}</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:4px">Qty: ${item.qty}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="cart-item-price">₹${(item.price * item.qty).toLocaleString()}</div>
+          <button class="cart-item-remove" onclick="removeFromCart(${i})">✕</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('cartTotal').textContent = '₹' + total.toLocaleString();
+  footer.style.display = 'block';
+}
+
+function removeFromCart(index) {
+  cartCount -= cartItems[index].qty;
+  cartItems.splice(index, 1);
+  document.querySelector('.cart-count').textContent = cartCount;
+  renderCart();
+}
+
+function openCart() {
+  document.getElementById('cartModal').classList.add('open');
+  document.getElementById('cartOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCart() {
+  document.getElementById('cartModal').classList.remove('open');
+  document.getElementById('cartOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Open cart on icon click
+document.querySelector('.nav-cart').addEventListener('click', () => {
+  renderCart();
+  openCart();
+});
+
+function checkout() {
+  alert('✦ Thank you for your interest!\n\nFor high-value purchases, our team will contact you within 24 hours to arrange a private consultation and secure payment.\n\n+91 40 1234 5678');
+  closeCart();
+}
+
+// =================== CONTACT FORM ===================
+function submitForm() {
+  const name = document.getElementById('cname').value.trim();
+  const email = document.getElementById('cemail').value.trim();
+  const service = document.getElementById('cservice').value;
+
+  if (!name || !email || !service) {
+    alert('Please fill in all required fields.');
+    return;
+  }
+
+  const success = document.getElementById('formSuccess');
+  success.style.display = 'block';
+
+  document.getElementById('cname').value = '';
+  document.getElementById('cemail').value = '';
+  document.getElementById('cphone').value = '';
+  document.getElementById('cservice').value = '';
+
+  setTimeout(() => { success.style.display = 'none'; }, 5000);
+}
+
+// =================== MOUSE PARALLAX ===================
+document.addEventListener('mousemove', (e) => {
+  const x = (e.clientX / window.innerWidth - 0.5) * 20;
+  const y = (e.clientY / window.innerHeight - 0.5) * 20;
+  const ring = document.getElementById('ring');
+  if (ring) {
+    ring.style.animationPlayState = 'paused';
+    ring.style.transform = `rotateY(${x * 3}deg) rotateX(${-y * 2}deg)`;
+  }
+});
+
+document.querySelector('.hero').addEventListener('mouseleave', () => {
+  const ring = document.getElementById('ring');
+  if (ring) ring.style.animationPlayState = 'running';
+});
+
+// =================== SMOOTH SCROLL ===================
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(anchor.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// =================== STAT REVEAL ===================
+const statObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      entry.target.style.animation = `revealUp 0.6s ${i * 0.1}s cubic-bezier(0.16, 1, 0.3, 1) forwards`;
+      statObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.2 });
+document.querySelectorAll('.stat').forEach(el => statObserver.observe(el));
+
+console.log('%c LUMIÈRE Fine Jewellery', 'color: #C9A84C; font-size: 20px; font-family: serif; font-style: italic;');
+console.log('%c AWS Static Website — Ready for Deployment', 'color: #8A7A6A; font-size: 12px;');
+
+</script>
+</body>
+</html>
